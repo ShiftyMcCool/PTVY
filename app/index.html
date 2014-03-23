@@ -1,0 +1,58 @@
+<!doctype html>
+<html ng-app="myApp">
+  <head>
+
+    <link rel="stylesheet" href="/styles/style.css">
+    <link rel="stylesheet" href="/styles/toaster.css">
+
+    <title>Code Development Project</title>
+  </head>
+
+  <body>
+    <div class="page-container" ng-controller="PageTemplateController">
+      <header>Code Development Project</header>
+
+      <div class="container-divider"></div>
+
+      <div class="viewport-container" ng-view></div>
+
+      <div class="container-divider"></div>
+      
+      <div class="carousel-container">
+        <div class="button-container">
+          <button class='{{prevClass}}' ng-disabled="prevEnabled()" ng-click="currentPage=currentPage-1">
+              <img src="/images/previous.png" />
+          </button>
+        </div>
+
+        <div class="carousel-viewport-container" ng-repeat="pagetemplate in portfolio | startFrom:currentPage*pageSize | limitTo:pageSize">
+          <div class="carousel-viewport">
+              <div class="carousel-item" ng-click="go('/detail/',pagetemplate.id)">
+                <img ng-class="{ 'carousel-img' : 1==1, 'page-template-active': pagetemplate.id == selectedID, 'page-template-inactive': pagetemplate.id != selectedID }" ng-click="activatePageTemplate(pagetemplate.id)" ng-src="/images/thumbnails/{{pagetemplate.smallpic || 'empty.jpg'}}" /><br>
+                <a class="carousel-item-link">{{pagetemplate.title}}</a>                  
+              </div>
+          </div>
+        </div>
+
+        <div class="button-container">
+          <button class="{{nextClass}}" ng-disabled="nextEnabled()" ng-click="currentPage=currentPage+1">
+            <img src="/images/next.png" />
+          </button>
+        </div>
+
+        <toaster-container toaster-options="{'time-out': 3000}"></toaster-container>
+      </div>
+    </div>
+    
+    <script src="/scripts/lib/angular.min.js"></script>
+    <script src="/scripts/lib/angular-route.js"></script>
+    <script src="/scripts/lib/angular-animate.js"></script>
+    <script src="/scripts/lib/xml2json.min.js"></script>
+    <script src="/scripts/lib/toaster.js"></script>
+    <script src="/scripts/app.js"></script>
+    <script src="/scripts/controllers/controllers.js"></script>
+    <script src="/scripts/services/services.js"></script>
+    <script src="/scripts/directives/directives.js"></script>
+    <script src="/scripts/filters/filters.js"></script>
+  </body>
+</html>

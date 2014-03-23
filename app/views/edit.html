@@ -1,0 +1,30 @@
+<div class="large-image-container">
+  <img class="large-image" ng-src="/images/large/{{thisTemplate.largepic || 'empty.jpg'}}" />
+</div> 
+
+<div class="details-container">
+  <form ng-submit="savePageTemplate()">
+    <p><label class="field-label" for="title">Title</label>
+      <input class="form-field" type="text" name="title" id="title" ng-model="thisTemplate.title" /><br></p>
+
+    <p><label class="field-label" for="description">Description</label>
+      <input class="form-field" type="text" name="description" id="description" ng-model="thisTemplate.description" /><br></p>
+
+    <p><label class="field-label" for="cost">Cost</label>
+      <input class="form-field" type="text" name="cost" id="cost" ng-model="thisTemplate.cost" /><br></p>
+
+    <p><label class="field-label" for="pid">ID#</label>
+      <input class="form-field" type="text" name="pid" id="pid" ng-model="thisTemplate.id" required /><br></p>
+
+    <p><label class="field-label" for="smallpic">Thumbnail File</label>
+      <input class="form-field" type="text" name="smallpic" id="smallpic" ng-model="thisTemplate.smallpic" /><br></p>
+
+    <p><label class="field-label" for="largepic">Large Image File</label>
+      <input class="form-field" type="text" name="largepic" id="largepic" size="18" on-Change="thisTemplate.largepic" /><br></p>
+
+    <p>
+		<input class="btn-primary" type="submit" value="Save" />
+		<input type="button" value="Cancel" ng-click="go('/detail/',thisTemplate.id)" />
+    </p>
+  </form>
+</div>
