@@ -20,12 +20,12 @@
       
       <div class="carousel-container">
         <div class="button-container">
-          <button class='{{prevClass}}' ng-disabled="prevEnabled()" ng-click="currentPage=currentPage-1">
+          <button class='{{prevClass}}' ng-disabled="prevEnabled()" ng-click="prevPage()">
               <img src="/images/previous.png" />
           </button>
         </div>
 
-        <div class="carousel-viewport-container" ng-repeat="pagetemplate in portfolio | startFrom:currentPage*pageSize | limitTo:pageSize">
+        <div class="carousel-viewport-container" ng-repeat="pagetemplate in portfolio | startFrom:currentPage*pageSize | limitTo:pageSize" ng-animate="'animate'">
           <div class="carousel-viewport">
               <div class="carousel-item" ng-click="go('/detail/',pagetemplate.id)">
                 <img ng-class="{ 'carousel-img' : 1==1, 'page-template-active': pagetemplate.id == selectedID, 'page-template-inactive': pagetemplate.id != selectedID }" ng-click="activatePageTemplate(pagetemplate.id)" ng-src="/images/thumbnails/{{pagetemplate.smallpic || 'empty.jpg'}}" /><br>
@@ -35,7 +35,7 @@
         </div>
 
         <div class="button-container">
-          <button class="{{nextClass}}" ng-disabled="nextEnabled()" ng-click="currentPage=currentPage+1">
+          <button class="{{nextClass}}" ng-disabled="nextEnabled()" ng-click="nextPage()">
             <img src="/images/next.png" />
           </button>
         </div>
@@ -54,5 +54,6 @@
     <script src="/scripts/services/services.js"></script>
     <script src="/scripts/directives/directives.js"></script>
     <script src="/scripts/filters/filters.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
   </body>
 </html>

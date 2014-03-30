@@ -5,14 +5,7 @@ var ptServices = angular.module('pageTemplateServices',[]);
 ptServices.factory('portfolio', function($http){
   return {
     getPortfolio: function($scope) {
-      return $http.get($scope.dataSourceUrl + '/get', {
-        //return $http.get('/xml/PageTemplatePortfolio.xml', {
-        transformResponse:function(data) {
-          var x2js = new X2JS();
-          var json = x2js.xml_str2json( data ).portfolio.pagetemplate;
-          return json;
-        }
-      });
+      return $http.get($scope.dataSourceUrl + '/get');
     },
     getPageTemplate: function($scope,id) {
       angular.forEach($scope.portfolio, function(value, key){
@@ -46,21 +39,7 @@ ptServices.factory('portfolio', function($http){
       this.persistData($scope);
     },
     persistData: function($scope) {
-      var x2js = new X2JS();
-      var xmlCopy = angular.copy($scope.portfolio);
-      var xml = '<portfolio>';
-
-      for(var x in $scope.portfolio) {
-        xml += '<pagetemplate>'
-        
-        xml += x2js.json2xml_str(xmlCopy[x]);
-
-        xml += '</pagetemplate>'
-      }
-
-      xml += '</portfolio>'
-
-      $http.post($scope.dataSourceUrl + '/save?portfolio=' + xml);
+      $http.post($scope.dataSourceUrl + '/save', $scope.portfolio);      
     }
   };
 });

@@ -5,7 +5,7 @@ var ptControllers = angular.module('pageTemplateControllers', ['toaster']);
 ptControllers.controller('PageTemplateController', function($scope,$route,$location,portfolio,toaster) {
   $scope.portfolio = [];
   $scope.ptIndex = 0;
-  $scope.dataSourceUrl = 'http://localhost:8088';
+  $scope.dataSourceUrl = 'http://localhost:8080';
 
   var handleSuccess = function(data, status) {
     $scope.portfolio = data;
@@ -48,6 +48,14 @@ ptControllers.controller('PageTemplateController', function($scope,$route,$locat
     } 
 
     $location.path( path );
+  };
+
+  $scope.nextPage = function () {
+    $scope.currentPage = $scope.currentPage + 1;
+  };
+
+  $scope.prevPage = function () {
+    $scope.currentPage = $scope.currentPage - 1;
   };
 });
 
